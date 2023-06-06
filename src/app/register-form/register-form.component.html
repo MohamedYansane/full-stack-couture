@@ -75,48 +75,48 @@
                     </select>
                 </div>
             </div>
-            <div class="gender-details input-box flex flex-col">
-                <input
-                    type="radio"
-                    name="genre"
-                    id="dot-1"
-                    value="Masculin"
-                    formControlName="genre"
+            <div class="gender-details input-box">
+                <mat-radio-group
+                    aria-label="Choisir une option"
+                    formControlName="sexe"
+                    class="flex gap-x-1 items-center"
                 >
-                <input
-                    type="radio"
-                    name="genre"
-                    value="Feminin"
-                    formControlName="genre"
-                    id="dot-2"
-                >
-                <span class="gender-title text-md font-bold">Genre</span>
-                <div class="category">
-                    <label for="dot-1">
-                        <span class="dot one"></span>
-                        <span class="gender mr-2">Masculin</span>
-                    </label>
-                    <label for="dot-2">
-                        <span class="dot two"></span>
-                        <span class="gender">Feminin</span>
-                    </label>
-                </div>
+                    <mat-label class="text-md">
+                        <b>Genre</b>
+                    </mat-label>
+                    <mat-radio-button
+                        value="Masculin"
+                        id="dot-1"
+                        id="custom-radio-btn"
+                    >
+                        Masculin
+                    </mat-radio-button>
+                    <mat-radio-button
+                        value="Feminin"
+                        id="dot-2"
+                        id="custom-radio-btn"
+                    >
+                        Feminin
+                    </mat-radio-button>
+
+                </mat-radio-group>
             </div>
         </div>
 
         <div class="mat-dialog-actions flex justify-between w-full mt-4">
-            <button
+            <span
                 mat-raised-button
                 [mat-dialog-close]="false"
                 class="btn-cancel w-[48%] px-4 py-2 shadow-md rounded-md"
             >
                 Fermer
-            </button>
+            </span>
             <button
                 type="submit"
                 class="btn-save px-4 text-white py-2 rounded-md shadow-md"
+                [class.false]="data.eyeOpen === false"
             >
-                Enregistrer
+                {{ data.data=== null ? "Enregistrer" : "Modifier" }}
             </button>
         </div>
     </form>

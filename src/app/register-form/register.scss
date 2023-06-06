@@ -59,7 +59,15 @@
     background: linear-gradient(-90deg, rgba(16,36,62,1) 0%, rgba(80,115,251,1) 35%, rgba(0,212,255,1) 100%);
   }
   .gender-details{
+    .mat-mdc-radio-button.mat-accent {
 
+      --mdc-radio-selected-focus-icon-color: #5073fb !important;
+      --mdc-radio-selected-hover-icon-color:#5073fb  !important;
+      --mdc-radio-selected-icon-color: #5073fb  !important;
+      --mdc-radio-selected-pressed-icon-color: #5073fb  !important;
+
+      --mat-radio-checked-ripple-color: #5073fb  !important;
+    }
     .category
     {
       display: flex;
@@ -101,7 +109,10 @@
   }
   input[type="radio"]
   {
-    display: none;
+    display: block;
     }
+  }
+  .false{
+    display: none;
   }
 }

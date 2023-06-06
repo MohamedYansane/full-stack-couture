@@ -13,4 +13,19 @@ export class ClientsService {
   getListOfAllClients(): Observable<Client[]>{
     return this.httpClient.get<Client[]>(`${this.baseUrl}`)
   }
+  addClient(client: Client): Observable<Object>{
+    return this.httpClient.post(`${this.baseUrl}`,client)
+
+  }
+  updateClient(id:number, data:any): Observable<Object>{
+    return this.httpClient.put(`${this.baseUrl}/${id}`,data)
+  }
+  getClientById(id:number):Observable<Client>{
+    return this.httpClient.get<Client>(`${this.baseUrl}/${id}`);
+  }
+  deleteClientById(id:number):Observable<Object>{
+    return this.httpClient.delete(`${this.baseUrl}/${id}`);
+
+  }
+
 }
