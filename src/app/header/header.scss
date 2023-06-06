@@ -1,0 +1,45 @@
+.header{
+  height: 70px;
+  width: 100%;
+  right: 0;
+  .left{
+    width: 250px;
+    .icon {
+      font-size: 24px;
+      font-weight: normal;
+      cursor: pointer;
+    }
+  }
+  .right{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: calc(100% - 250px);
+    .search-bar {
+      width: 290px;
+      background: #f7f7f7;
+      display: flex;
+      align-items: center;
+      input{
+        width: 270px;
+        border: none;
+        padding: 9px;
+
+        outline: none;
+        background: #fefeff;
+        font-size: 12px;
+
+      }
+    }
+    .profil{
+      display: flex;
+      .greeting{
+        display: flex;
+        align-items: center;
+        p{
+          margin: 0 !important;
+        }
+      }
+    }
+  }
+}
