@@ -58,6 +58,22 @@
     color: #fff;
     background: linear-gradient(-90deg, rgba(16,36,62,1) 0%, rgba(80,115,251,1) 35%, rgba(0,212,255,1) 100%);
   }
+
+
+  @keyframes rotate-hue {
+    to {
+      filter: hue-rotate(1turn);
+    }
+  }
+
+  .btn-cancel,
+  .btn-cancel::after {
+    box-sizing: border-box;
+  }
+
+  .btn-cancel:active {
+    --border-width: 4px
+  }
   .gender-details{
     .mat-mdc-radio-button.mat-accent {
 

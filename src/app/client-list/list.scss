@@ -42,6 +42,10 @@
         padding: 10px;
         font-family: "Jetbrains Mono" !important;
       }
+
+      tr:hover{
+        background-color:#f8fafc;
+      }
       .actif{color:#5073fb;}
       .inactif{
         color: red !important;
