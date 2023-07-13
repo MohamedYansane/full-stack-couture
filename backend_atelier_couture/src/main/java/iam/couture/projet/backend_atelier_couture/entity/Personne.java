@@ -27,4 +27,6 @@ public class Personne {
     private LocalDate Birthday;
     @Column(name="phone", length= 25, nullable = false)
     private String phone;
+    @OneToOne
+    private Client client;
 }

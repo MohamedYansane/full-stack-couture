@@ -4,14 +4,13 @@ package iam.couture.projet.backend_atelier_couture.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.List;
 
 @SuppressWarnings("ALL")
 @Entity
 @Data
 
 @Table(name="client")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,6 +33,4 @@ public class Client {
     @Column(name="status", nullable = false, length=10)
     private String status;
 
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
-    private List<Mesure> mesures;
 }
