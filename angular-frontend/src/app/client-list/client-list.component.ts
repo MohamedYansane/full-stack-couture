@@ -1,6 +1,11 @@
-import { Component,ViewChild } from '@angular/core';
-import {faEdit} from "@fortawesome/free-regular-svg-icons";
-import {faPenSquare,faTrash,faPlusCircle,faEye} from "@fortawesome/free-solid-svg-icons";
+import { Component, ViewChild } from '@angular/core';
+import { faEdit } from '@fortawesome/free-regular-svg-icons';
+import {
+  faPenSquare,
+  faTrash,
+  faPlusCircle,
+  faEye,
+} from '@fortawesome/free-solid-svg-icons';
 import { Client } from '../client';
 import { MatDialog } from '@angular/material/dialog';
 import { RegisterFormComponent } from '../register-form/register-form.component';
@@ -11,12 +16,13 @@ import { ClientsService } from '../services/clients.service';
 @Component({
   selector: 'app-client-list',
   templateUrl: './client-list.component.html',
+
   styleUrls: ['./list.scss'],
-  providers: [MatTableDataSource]
+  providers: [MatTableDataSource],
 })
 export class ClientListComponent {
   //initialisation
-  clients !: Client[];
+  clients!: Client[];
 
   faPenSquare = faPenSquare;
   faTrash = faTrash;
@@ -25,8 +31,12 @@ export class ClientListComponent {
   faPlusCircle = faPlusCircle;
   //after creating my service file and put the necessary code
   //code inside i'm gonna inject then
-  constructor(private clientService:ClientsService,private _dialog: MatDialog, public dataSource: MatTableDataSource<any>){}
-  ngOnInit():void {
+  constructor(
+    private clientService: ClientsService,
+    private _dialog: MatDialog,
+    public dataSource: MatTableDataSource<any>
+  ) {}
+  ngOnInit(): void {
     //call my methods here
     this.getClients();
   }
@@ -44,46 +54,45 @@ export class ClientListComponent {
     'action',
   ];
 
-
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   //dialog part
-  openDialogForm(){
-    const dialogRef = this._dialog.open(RegisterFormComponent,{data:{data:null, eyeOpen:true}});
+  openDialogForm() {
+    const dialogRef = this._dialog.open(RegisterFormComponent, {
+      data: { data: null, eyeOpen: true },
+    });
     dialogRef.afterClosed().subscribe({
-      next:(val) =>{
-        if(val){
+      next: (val) => {
+        if (val) {
           //whenever i close the dialog dialog my table
           //must be refreshed in register component i'll check if it's true or not
           this.getClients();
         }
-      }
-    })
-
+      },
+    });
   }
 
-  openEditForm(data : any,eyeOpen: boolean = true) {
-    const dialogRef = this._dialog.open(RegisterFormComponent,{
-      data:
-       {
+  openEditForm(data: any, eyeOpen: boolean = true) {
+    const dialogRef = this._dialog.open(RegisterFormComponent, {
+      data: {
         data,
-        eyeOpen
-      }
+        eyeOpen,
+      },
     });
     // so now how i'm gonna receive the data let's jump then in register component
     // little i'm gonna inject
     dialogRef.afterClosed().subscribe({
-      next:(val) =>{
-        if(val){
+      next: (val) => {
+        if (val) {
           //whenever i close the dialog dialog my table
           //must be refreshed in register component i'll check if it's true or not
           this.getClients();
         }
-      }
-    })
+      },
+    });
   }
-  getClients(){
-    this.clientService.getListOfAllClients().subscribe(data =>{
+  getClients() {
+    this.clientService.getListOfAllClients().subscribe((data) => {
       // it's an ansynchronous response i'm gonna handle it
       //or set it to my client i defined below
       this.clients = data;
@@ -103,23 +112,22 @@ export class ClientListComponent {
     }
   }
 
-  deleteUser(id:number){
-    let text : string = "Do you want to delete this user";
-    if(confirm(text)) {
+  deleteUser(id: number) {
+    let text: string = 'Do you want to delete this user';
+    if (confirm(text)) {
       this.clientService.deleteClientById(id).subscribe({
-        next:(val:any) => {
-          if(val){
-            alert("Deleted successfully");
+        next: (val: any) => {
+          if (val) {
+            alert('Deleted successfully');
             this.getClients();
           }
-        },error:(err:any) => {
+        },
+        error: (err: any) => {
           console.log(err);
-        }
+        },
       });
-    }else{
-      alert("Not deleted");
+    } else {
+      alert('Not deleted');
     }
-
   }
-
 }
