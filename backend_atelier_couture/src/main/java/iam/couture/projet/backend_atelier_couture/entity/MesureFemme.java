@@ -7,15 +7,13 @@ import lombok.Data;
 @SuppressWarnings("ALL")
 @Entity
 @Data
-
+@Table(name = "Mesures")
 public class MesureFemme extends Mesures{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(name = "dessousPoids",nullable = false)
+
+    @Column(name = "dessous_poids")
     private Float dessousPoids;
-    @Column(name = "cretesIliaques",nullable = false)
+    @Column(name = "cretes_iliaques")
     private Float creteIliaques;
-    @Column(name = "ldos",nullable = false)
+    @Column(name = "ldos",nullable = false )
     private Float ldos;
 }

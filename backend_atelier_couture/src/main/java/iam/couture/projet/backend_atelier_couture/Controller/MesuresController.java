@@ -1,7 +1,8 @@
 package iam.couture.projet.backend_atelier_couture.Controller;
 
 
-import iam.couture.projet.backend_atelier_couture.entity.Mesures;
+import iam.couture.projet.backend_atelier_couture.entity.MesureFemme;
+
 import iam.couture.projet.backend_atelier_couture.exception.RessourceNotFoundException;
 import iam.couture.projet.backend_atelier_couture.repository.MesuresRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,24 +21,35 @@ public class MesuresController {
     @Autowired
     protected MesuresRepository mesureRepository;
     @GetMapping("/mesures")
-    protected List<Mesures>getAllMesures(){
+    protected List<MesureFemme>getAllMesures(){
         return mesureRepository.findAll();
     }
    @PostMapping("/mesures")
-    protected Mesures addMesure(@RequestBody Mesures mesure){
+   protected MesureFemme addMesure(@RequestBody MesureFemme mesure) {
+
        return mesureRepository.save(mesure);
    }
    @GetMapping("/mesures/{id}")
-    protected ResponseEntity<Mesures>getMesureById(@PathVariable Long id){
-        Mesures mesure = mesureRepository.findById(id)
+    protected ResponseEntity<MesureFemme>getMesureById(@PathVariable Long id){
+        MesureFemme mesure = mesureRepository.findById(id)
                 .orElseThrow(()-> new RessourceNotFoundException("Mesure is not in with id: "+id));
        return ResponseEntity.ok(mesure);
 
    }
    @PutMapping("/mesures/{id}")
-   protected ResponseEntity<Mesures>updateMesure(@PathVariable Long id, @RequestBody Mesures mesure){
-       Mesures _mesure = mesureRepository.findById(id)
+   protected ResponseEntity<MesureFemme>updateMesure(@PathVariable Long id, @RequestBody MesureFemme mesure){
+       MesureFemme _mesure = mesureRepository.findById(id)
                .orElseThrow(()-> new RessourceNotFoundException("Mesure is not in with id: "+id));
+       // i want to check if he wants to update data of the subclass attribut hope it works
+       if(_mesure instanceof MesureFemme && mesure instanceof  MesureFemme)
+       {
+           MesureFemme _mesureF = (MesureFemme) _mesure;
+           MesureFemme mesureF = (MesureFemme) mesure;
+           _mesureF.setCreteIliaques(mesureF.getCreteIliaques());
+           _mesureF.setDessousPoids(mesureF.getDessousPoids());
+           _mesureF.setLdos(mesureF.getLdos());
+
+       }
        _mesure.setAvantBras(mesure.getAvantBras());
        _mesure.setBiceps(mesure.getBiceps());
        _mesure.setCheville(mesure.getCheville());
@@ -56,13 +68,13 @@ public class MesuresController {
        _mesure.setPoignet(mesure.getPoignet());
        _mesure.setPoitrine(mesure.getPoitrine());
        _mesure.setTete(mesure.getTete());
-       Mesures updateMesure = mesureRepository.save(_mesure);
+       MesureFemme updateMesure = mesureRepository.save(_mesure);
        return ResponseEntity.ok(updateMesure);
 
    }
     @DeleteMapping("/mesures/{id}")
     protected ResponseEntity<Map<String, Boolean>>deleteMesure(@PathVariable Long id){
-        Mesures mesure = mesureRepository.findById(id)
+        MesureFemme mesure = mesureRepository.findById(id)
                 .orElseThrow(()-> new RessourceNotFoundException("Mesure is not in with id: "+id));
         mesureRepository.delete(mesure);
         Map<String, Boolean> response = new HashMap<>();

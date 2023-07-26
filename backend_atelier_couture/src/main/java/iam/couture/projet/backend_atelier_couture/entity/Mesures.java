@@ -3,9 +3,9 @@ package iam.couture.projet.backend_atelier_couture.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-@Entity
+
 @Data
-@Table(name = "mesures")
+@MappedSuperclass
 public class Mesures {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,6 +28,7 @@ public class Mesures {
     protected Float htotale;
     protected  Float poitrine;
     @ManyToOne
+
     protected Client client;
 
 }

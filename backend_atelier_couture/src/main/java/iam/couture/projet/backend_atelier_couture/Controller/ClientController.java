@@ -5,6 +5,7 @@ import iam.couture.projet.backend_atelier_couture.exception.RessourceNotFoundExc
 import iam.couture.projet.backend_atelier_couture.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -19,6 +20,7 @@ public class ClientController {
     @Autowired
     private ClientRepository clientRepository;
     @GetMapping("/clients")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public List<Client>getAllClient(){
         return clientRepository.findAll();
     }
