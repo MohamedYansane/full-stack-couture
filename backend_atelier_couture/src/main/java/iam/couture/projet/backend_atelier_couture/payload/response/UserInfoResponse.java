@@ -20,7 +20,9 @@ public class UserInfoResponse {
         this.roles = roles;
     }
 
-
+    public void setTokenType(String tokenType) {
+        this.type = tokenType;
+    }
 
     public Long getId() {
         return id;
