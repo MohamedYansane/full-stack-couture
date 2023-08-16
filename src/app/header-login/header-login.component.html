@@ -1,0 +1,65 @@
+<section class="header-section sticky top-0 left-0 right-0 z-50 bg-white shadow-[rgba(7,_65,_210,_0.1)_0px_9px_30px]">
+    <header class="py-4 mx-auto container ">
+        <a
+            routerLink="/"
+            class="logo w-16 md:hidden sm:hidden"
+        >
+            <span class="w-16 md:hidden sm:hidden">OKAPY</span>
+        </a>
+        <div class="nav-bar right-0 w-full top-0 bottom-0 z-[49] transition-all duration-300  ">
+            <ul class="navbar-items font-semibold  items-center gap-x-5 text-dark-soft">
+                <li class="nav-item relative group ">
+                    <a
+                        routerLink="/home"
+                        class="px-4 py-2"
+                        routerLinkActive="active"
+                    >
+                        Home
+                        <span class="text-blue-500 absolute transition-all duration-500 group-hover:font-bold right-0 top-0  group-hover:right-[90%] opacity-0 group-hover:opacity-100">/</span>
+                    </a>
+                </li>
+                <li
+                    class="nav-item relative group "
+                    *ngIf="showAdminBoard"
+                >
+                    <a
+                        routerLink="/admin"
+                        class="px-4 py-2"
+                    >
+                        Admin board
+                        <span class="text-blue-500 absolute transition-all duration-500 group-hover:font-bold right-0 top-0  group-hover:right-[90%] opacity-0 group-hover:opacity-100">/</span>
+
+                    </a>
+                </li>
+                <li
+                    class="nav-item relative group "
+                    *ngIf="showModeratorBoard"
+                >
+                    <a
+                        routerLink="/clients"
+                        class="px-4 py-2"
+                    >
+                        Moderator board
+                        <span class="text-blue-500 absolute transition-all duration-500 group-hover:font-bold right-0 top-0  group-hover:right-[90%] opacity-0 group-hover:opacity-100">/</span>
+
+                    </a>
+                </li>
+            </ul>
+            <button
+                class="btnSignin border-2 mt-5 lg:mt-0 border-blue-500 px-4 py-2 rounded-full"
+                type="submit"
+                *ngIf="!isLoggedIn"
+            >
+                Sign in
+            </button>
+            <button
+                class="btnSignin border-2 mt-5 lg:mt-0 border-blue-500 px-4 py-2 rounded-full"
+                type="submit"
+                *ngIf="isLoggedIn"
+                (click)="logout"
+            >
+                Sign out
+            </button>
+        </div>
+    </header>
+</section>

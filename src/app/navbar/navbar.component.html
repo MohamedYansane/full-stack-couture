@@ -1,0 +1,90 @@
+<section class="sidebars">
+    <!-- begining of top sidebar -->
+    <ul
+        class="top-sidebar-items"
+        *ngIf="isLoggedIn"
+    >
+        <p class="title">Main</p>
+        <a href="/">
+            <li class="sidebar-item">
+                <fa-icon
+                    [icon]="faDashboard"
+                    class="icon"
+                ></fa-icon>
+                <span>Tableau de bord</span>
+            </li>
+        </a>
+        <p class="title">List</p>
+
+        <li
+            class="moderator"
+            *ngIf="showModeratorBoard"
+        >
+            <a routerLink="/clients">
+                <fa-icon
+                    [icon]="faUserRegular"
+                    class="icon"
+                ></fa-icon>
+                <span>Clients</span>
+            </a>
+        </li>
+
+        <li
+            class="moderator"
+            *ngIf="showModeratorBoard"
+        >
+            <a routerLink="/mesures">
+                <fa-icon
+                    [icon]="faTape"
+                    class="icon"
+                ></fa-icon>
+                <span>Mesures</span>
+            </a>
+        </li>
+
+        <a routerLink="/couturiers">
+            <li class="sidebar-item">
+                <fa-icon
+                    [icon]="faUserRegular"
+                    class="icon"
+                ></fa-icon>
+                <span>Couturiers</span>
+            </li>
+        </a>
+        <a href="/">
+            <li class="sidebar-item">
+                <fa-icon
+                    [icon]="faUserRegular"
+                    class="icon"
+                ></fa-icon>
+                <span>Utilisateurs</span>
+            </li>
+        </a>
+    </ul>
+    <!-- end of top sidebar -->
+    <!-- begining of bottom sidebar -->
+    <ul class="bottom-sidebar-items">
+        <p class="title">User</p>
+        <a href="/">
+            <li class="sidebar-item">
+                <fa-icon
+                    [icon]="faUserRegular"
+                    class="icon"
+                ></fa-icon>
+                <span>Profil</span>
+            </li>
+        </a>
+        <a (click)="logout()">
+            <li class="sidebar-item">
+                <fa-icon
+                    [icon]="faArrowRightFromBracket"
+                    class="icon"
+                ></fa-icon>
+
+                <span>Deconnexion</span>
+            </li>
+        </a>
+    </ul>
+    <!-- end of bottom sidebar -->
+    <router-outlet></router-outlet>
+</section>

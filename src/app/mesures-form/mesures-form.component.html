@@ -1,0 +1,225 @@
+<div class="container shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px]   rounded-md p-5 gap-y-4">
+    <div
+        class="title text-xl font-bold"
+        modal-dialog-title
+    >
+        Formulaire
+    </div>
+    <form
+        [formGroup]="valForm"
+        (ngSubmit)="onFormSubmit()"
+    >
+        <div class="user-informations flex flex-wrap justify-between ">
+            <div class="input-box  flex flex-col items-center">
+                <span class="input-title text-md font-bold">Avant Bras</span>
+                <input
+                    type="number"
+                    placeholder="Enter avant bras"
+                    formControlName="avantBras"
+                >
+            </div>
+            <div class="input-box  flex flex-col items-center">
+                <span class="input-title text-md font-bold">Biceps</span>
+                <input
+                    type="number"
+                    placeholder="Enter biceps"
+                    formControlName="biceps"
+                >
+            </div>
+            <div class="input-box  flex flex-col items-center">
+                <span class="input-title text-md font-bold">Cheville</span>
+                <input
+                    type="number"
+                    placeholder="Enter cheville"
+                    formControlName="cheville"
+                >
+            </div>
+            <div class="input-box  flex flex-col items-center">
+                <span class="input-title text-md font-bold">Cou</span>
+                <input
+                    type="number"
+                    placeholder="Enter cou"
+                    formControlName="cou"
+                >
+            </div>
+            <div class="input-box  flex flex-col items-center">
+                <span class="input-title text-md font-bold">Coude</span>
+                <input
+                    type="number"
+                    placeholder="Enter coude"
+                    formControlName="coude"
+                >
+            </div>
+            <div class="input-box  flex flex-col items-center">
+                <span class="input-title text-md font-bold">Couture Extension</span>
+                <input
+                    type="number"
+                    placeholder="Enter couture extension"
+                    formControlName="coutureExt"
+                >
+            </div>
+
+            <div class="input-box  flex flex-col items-center">
+                <span class="input-title text-md font-bold">Cuisse</span>
+                <input
+                    type="number"
+                    placeholder="Enter cuisse"
+                    formControlName="cuisse"
+                >
+            </div>
+            <div class="input-box  flex flex-col items-center">
+                <span class="input-title text-md font-bold">Entre Jambes</span>
+                <input
+                    type="number"
+                    placeholder="Enter entre jambes"
+                    formControlName="entreJambes"
+                >
+            </div>
+            <div class="input-box  flex flex-col items-center">
+                <span class="input-title text-md font-bold">Epaule</span>
+                <input
+                    type="number"
+                    placeholder="Enter epaule"
+                    formControlName="epaules"
+                >
+            </div>
+            <div class="input-box  flex flex-col items-center">
+                <span class="input-title text-md font-bold">Genou</span>
+                <input
+                    type="number"
+                    placeholder="Enter genou"
+                    formControlName="genou"
+                >
+            </div>
+            <div class="input-box  flex flex-col items-center">
+                <span class="input-title text-md font-bold">Hanches</span>
+                <input
+                    type="number"
+                    placeholder="Enter hanches"
+                    formControlName="hanches"
+                >
+            </div>
+            <div class="input-box  flex flex-col items-center">
+                <span class="input-title text-md font-bold">Htotale</span>
+                <input
+                    type="number"
+                    placeholder="Enter htotale"
+                    formControlName="htotale"
+                >
+            </div>
+            <div class="input-box  flex flex-col items-center">
+                <span class="input-title text-md font-bold">Tête</span>
+                <input
+                    type="number"
+                    placeholder="Enter tête"
+                    formControlName="tete"
+                >
+            </div>
+
+            <div class="input-box  flex flex-col items-center">
+                <span class="input-title text-md font-bold">Lbras</span>
+                <input
+                    type="number"
+                    placeholder="Enter lbras"
+                    formControlName="lbras"
+                >
+            </div>
+            <div class="input-box  flex flex-col items-center">
+                <span class="input-title text-md font-bold">Lcorps</span>
+                <input
+                    type="number"
+                    placeholder="Enter lcorps"
+                    formControlName="lcorps"
+                >
+            </div>
+            <div class="input-box  flex flex-col items-center">
+                <span class="input-title text-md font-bold">Poignet</span>
+                <input
+                    type="number"
+                    placeholder="Enter poignet"
+                    formControlName="poignet"
+                >
+            </div>
+            <div class="input-box  flex flex-col items-center">
+                <span class="input-title text-md font-bold">Poitrine</span>
+                <input
+                    type="number"
+                    placeholder="Enter poitrine"
+                    formControlName="poitrine"
+                >
+            </div>
+
+            <div class="input-box  flex flex-col items-center">
+                <span class="input-title text-md font-bold">Cretes Illiaques</span>
+                <input
+                    type="number"
+                    placeholder="Enter cretes illiaques"
+                    formControlName="creteIliaques"
+                >
+            </div>
+            <div class="input-box  flex flex-col items-center">
+                <span class="input-title text-md font-bold">Dessous Poids</span>
+                <input
+                    type="number"
+                    placeholder="Enter dessous poids"
+                    formControlName="dessousPoids"
+                >
+            </div>
+            <div class="input-box flex flex-col items-center">
+                <span class="input-title text-md font-bold">Client</span>
+                <div class="select-box">
+                    <select
+                        class="bg-white"
+                        formControlName="client"
+                        (change)="getValue($event)"
+                    >
+                        <option value>---select----</option>
+                        <option
+                            *ngFor="let client of clients;"
+                            [ngValue]="client"
+                        >
+                            {{client.nom}} {{client.phone}}
+                        </option>
+
+                    </select>
+                </div>
+            </div>
+
+            <!-- <div class="input-box  flex flex-col items-center">
+                <span class="input-title text-md font-bold">Dtypes</span>
+                <input
+                    type="number"
+                    placeholder="Enter dtypes"
+                    formControlName="dtypes"
+                >
+            </div>- -->
+            <div class="input-box  flex flex-col items-center">
+                <span class="input-title text-md font-bold">Ldos</span>
+                <input
+                    type="number"
+                    placeholder="Enter ldos"
+                    formControlName="ldos"
+                >
+            </div>
+
+        </div>
+
+        <div class="mat-dialog-actions flex justify-between w-full mt-4">
+            <a
+                href="/"
+                mat-raised-button
+                [mat-dialog-close]="false"
+                class="btn-cancel w-[48%] px-4 py-2 shadow-md rounded-md"
+            >
+                Fermer
+            </a>
+            <button
+                type="submit"
+                class="btn-save px-4 text-white py-2 rounded-md shadow-md"
+                [class.false]="data.eyeOpen === false"
+            >
+                {{ data.data=== null ? "Enregistrer" : "Modifier" }}
+            </button>
+        </div>
+    </form>
+</div>
