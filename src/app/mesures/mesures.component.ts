@@ -6,70 +6,62 @@ import {
   faPlusCircle,
   faEye,
 } from '@fortawesome/free-solid-svg-icons';
-import { Client } from '../client';
 import { MatDialog } from '@angular/material/dialog';
-import { RegisterFormComponent } from '../register-form/register-form.component';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { ClientsService } from '../services/clients.service';
-import { StorageService } from '../services/storage.service';
-@Component({
-  selector: 'app-client-list',
-  templateUrl: './client-list.component.html',
+import { Mesures } from '../mesures';
+import { MesuresService } from './../services/mesures.service';
+import { MesuresFormComponent } from '../mesures-form/mesures-form.component';
 
-  styleUrls: ['./list.scss'],
+@Component({
+  selector: 'app-mesures',
+  templateUrl: './mesures.component.html',
+  styleUrls: ['./mesures.scss'],
   providers: [MatTableDataSource],
 })
-export class ClientListComponent {
+export class MesuresComponent {
   //initialisation
-  clients!: Client[];
-  roles: string[] = [];
-  role?: any;
+  mesures!: Mesures[];
+
   faPenSquare = faPenSquare;
   faTrash = faTrash;
   faEdit = faEdit;
   faEye = faEye;
   faPlusCircle = faPlusCircle;
-  isModerator: boolean = false;
-  //after creating my service file and put the necessary code
-  //code inside i'm gonna inject then
   constructor(
-    private clientService: ClientsService,
+    private mesureService: MesuresService,
     private _dialog: MatDialog,
-    public dataSource: MatTableDataSource<any>,
-    private storageService: StorageService
+    public dataSource: MatTableDataSource<any>
   ) {}
   ngOnInit(): void {
-    //call my methods here
-    this.getClients();
-    this.roles = this.storageService.getUser();
-    console.log(`get role ${this.storageService.geRole('ROLE_MODERATOR')}`);
-    console.log(this.roles);
-    // j'ai un objet dans role je veux recuperer roles
-    /* for (let item in this.roles) {
-      if (item === 'roles') {
-        this.role = this.roles[item];
-      }
-    }
-    this.role.includes('ROLE_MODERATOR')
-      ? (this.isModerator = true)
-      : this.isModerator; plus besoin */
-    this.storageService.geRole('ROLE_MODERATOR')
-      ? (this.isModerator = true)
-      : this.isModerator;
+    this.getMesures();
   }
   //for mat table
   displayedColumns: string[] = [
     'id',
-    'nom',
-    'prenom',
-    'phone',
-    'adresse',
-    'email',
-    'cni',
-    'sexe',
-    'status',
+    'avantBras',
+    'biceps',
+    'cheville',
+    'cou',
+    'coude',
+    'coutureExt',
+    'cuisse',
+    'entreJambes',
+    'epaules',
+    'genou',
+    'hanches',
+    'htotale',
+    'lbras',
+    'lcorps',
+    'poitrine',
+    'poignet',
+    'creteIliaques',
+    'dessousPoids',
+    'tete',
+    'dtypes',
+    'ldos',
+    'client',
     'action',
   ];
 
@@ -77,7 +69,7 @@ export class ClientListComponent {
   @ViewChild(MatSort) sort!: MatSort;
   //dialog part
   openDialogForm() {
-    const dialogRef = this._dialog.open(RegisterFormComponent, {
+    const dialogRef = this._dialog.open(MesuresFormComponent, {
       data: { data: null, eyeOpen: true },
     });
     dialogRef.afterClosed().subscribe({
@@ -85,14 +77,16 @@ export class ClientListComponent {
         if (val) {
           //whenever i close the dialog dialog my table
           //must be refreshed in register component i'll check if it's true or not
-          this.getClients();
+          this.getMesures();
         }
       },
     });
   }
 
   openEditForm(data: any, eyeOpen: boolean = true) {
-    const dialogRef = this._dialog.open(RegisterFormComponent, {
+    console.log('data after clicking edit btn');
+    console.log(data);
+    const dialogRef = this._dialog.open(MesuresFormComponent, {
       data: {
         data,
         eyeOpen,
@@ -105,20 +99,41 @@ export class ClientListComponent {
         if (val) {
           //whenever i close the dialog dialog my table
           //must be refreshed in register component i'll check if it's true or not
-          this.getClients();
+          this.getMesures();
         }
       },
     });
   }
-  getClients() {
-    this.clientService.getListOfAllClients().subscribe((data) => {
+  getALLMesures() {
+    this.mesureService.getListOfAllMesures().subscribe((data) => {
       // it's an ansynchronous response i'm gonna handle it
       //or set it to my client i defined below
-      this.clients = data;
+      this.mesures = data;
       //getting from ViewChild
-      this.dataSource = new MatTableDataSource(this.clients);
+      data.map((item) => {
+        console.log(item);
+      });
+      this.dataSource = new MatTableDataSource(this.mesures);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
+    });
+  }
+  getMesures() {
+    this.mesureService.getListOfAllMesures().subscribe({
+      next: (res) => {
+        res.map((item) => {
+          console.log(item);
+        });
+        //getting from ViewChild
+        this.dataSource = new MatTableDataSource(res);
+        //console.log(this.dataSource);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+        console.log(res);
+      },
+      error: (error) => {
+        console.log(`list mesures error ${error}`);
+      },
     });
   }
   // filter from matTable
@@ -131,14 +146,14 @@ export class ClientListComponent {
     }
   }
 
-  deleteUser(id: number) {
+  deleteMesure(id: number) {
     let text: string = 'Do you want to delete this user';
     if (confirm(text)) {
-      this.clientService.deleteClientById(id).subscribe({
+      this.mesureService.deleteMesureById(id).subscribe({
         next: (val: any) => {
           if (val) {
             alert('Deleted successfully');
-            this.getClients();
+            this.getMesures();
           }
         },
         error: (err: any) => {

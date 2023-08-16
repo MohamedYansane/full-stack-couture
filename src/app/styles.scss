@@ -1,17 +1,15 @@
-.header{
-
+.header {
   height: 70px;
   width: 100%;
   right: 0;
 }
-.main-container{
+/*.main-container {
   position: relative;
   width: 100%;
-  min-height:calc(100vh - 70px);
+  min-height: calc(100vh - 70px);
 
-
-  .main-content{
-    position:absolute;
+  .main-content {
+    position: absolute;
     top: 0;
     right: 0;
     width: calc(100% - 210px);
@@ -21,6 +19,5 @@
     padding: 8px 20px;
     flex-direction: column;
     gap: 10px;
-
   }
-}
+}*/

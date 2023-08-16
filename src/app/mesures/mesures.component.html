@@ -1,0 +1,463 @@
+<app-header></app-header>
+<div class="main-container">
+    <app-navbar></app-navbar>
+    <div class="main-content">
+        <div class="table-mesures bg-white flex flex-col gap-y-4 bg-transparent p-3">
+            <div class="title flex items-center justify-between">
+                <h2 class="header-title ">Mesures</h2>
+                <div class="flex-1 flex items-center justify-end w-full gap-x-3">
+                    <input
+                        type="text"
+                        name
+                        id
+                        (keyup)="applyFilter($event)"
+                        placeholder="Rechercher...."
+                        #input
+                        class="field-input w-[38%]"
+                    >
+                    <button
+                        (click)="openDialogForm()"
+                        class=" text-white px-7 py-2 rounded-md w-[12%]"
+                    >
+                        <fa-icon [icon]="faPlusCircle"></fa-icon>
+                        Add
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="table-container rounded-md shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px]">
+                <table
+                    mat-table
+                    matSort
+                    [dataSource]="dataSource"
+                >
+
+                    <!-- ID Column -->
+                    <ng-container matColumnDef="id">
+                        <th
+                            mat-header-cell
+                            *matHeaderCellDef
+                            mat-sort-header
+                        >
+                            ID
+                        </th>
+                        <td
+                            mat-cell
+                            *matCellDef="let mesure"
+                        >
+                            {{mesure.id}}
+                        </td>
+                    </ng-container>
+
+                    <!-- Progress Column -->
+                    <ng-container matColumnDef="avantBras">
+                        <th
+                            mat-header-cell
+                            *matHeaderCellDef
+                            mat-sort-header
+                        >
+                            Avantbras
+                        </th>
+                        <td
+                            mat-cell
+                            *matCellDef="let mesure"
+                        >
+                            {{mesure.avantBras}}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="biceps">
+                        <th
+                            mat-header-cell
+                            *matHeaderCellDef
+                            mat-sort-header
+                        >
+                            Biceps
+                        </th>
+                        <td
+                            mat-cell
+                            *matCellDef="let mesure"
+                        >
+                            {{mesure.biceps}}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="cheville">
+                        <th
+                            mat-header-cell
+                            *matHeaderCellDef
+                            mat-sort-header
+                        >
+                            Cheville
+                        </th>
+                        <td
+                            mat-cell
+                            *matCellDef="let mesure"
+                        >
+                            {{mesure.cheville}}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="cou">
+                        <th
+                            mat-header-cell
+                            *matHeaderCellDef
+                            mat-sort-header
+                        >
+                            Cou
+                        </th>
+                        <td
+                            mat-cell
+                            *matCellDef="let mesure"
+                        >
+                            {{mesure.cou}}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="coude">
+                        <th
+                            mat-header-cell
+                            *matHeaderCellDef
+                            mat-sort-header
+                        >
+                            Coude
+                        </th>
+                        <td
+                            mat-cell
+                            *matCellDef="let mesure"
+                        >
+                            {{mesure.coude}}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="coutureExt">
+                        <th
+                            mat-header-cell
+                            *matHeaderCellDef
+                            mat-sort-header
+                        >
+                            CoutureExt
+                        </th>
+                        <td
+                            mat-cell
+                            *matCellDef="let mesure"
+                        >
+                            {{mesure.coutureExt}}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="cuisse">
+                        <th
+                            mat-header-cell
+                            *matHeaderCellDef
+                            mat-sort-header
+                        >
+                            Cuisse
+                        </th>
+                        <td
+                            mat-cell
+                            *matCellDef="let mesure"
+                        >
+                            {{mesure.cuisse}}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="entreJambes">
+                        <th
+                            mat-header-cell
+                            *matHeaderCellDef
+                            mat-sort-header
+                        >
+                            EntreJambes
+                        </th>
+                        <td
+                            mat-cell
+                            *matCellDef="let mesure"
+                        >
+                            {{mesure.entreJambes}}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="epaules">
+                        <th
+                            mat-header-cell
+                            *matHeaderCellDef
+                            mat-sort-header
+                        >
+                            Epaules
+                        </th>
+                        <td
+                            mat-cell
+                            *matCellDef="let mesure"
+                        >
+                            {{mesure.epaules}}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="genou">
+                        <th
+                            mat-header-cell
+                            *matHeaderCellDef
+                            mat-sort-header
+                        >
+                            Genou
+                        </th>
+                        <td
+                            mat-cell
+                            *matCellDef="let mesure"
+                        >
+                            {{mesure.genou}}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="hanches">
+                        <th
+                            mat-header-cell
+                            *matHeaderCellDef
+                            mat-sort-header
+                        >
+                            Hanches
+                        </th>
+                        <td
+                            mat-cell
+                            *matCellDef="let mesure"
+                        >
+                            {{mesure.hanches}}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="htotale">
+                        <th
+                            mat-header-cell
+                            *matHeaderCellDef
+                            mat-sort-header
+                        >
+                            Htotale
+                        </th>
+                        <td
+                            mat-cell
+                            *matCellDef="let mesure"
+                        >
+                            {{mesure.htotale}}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="lbras">
+                        <th
+                            mat-header-cell
+                            *matHeaderCellDef
+                            mat-sort-header
+                        >
+                            Lbras
+                        </th>
+                        <td
+                            mat-cell
+                            *matCellDef="let mesure"
+                        >
+                            {{mesure.lbras}}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="lcorps">
+                        <th
+                            mat-header-cell
+                            *matHeaderCellDef
+                            mat-sort-header
+                        >
+                            Lcorps
+                        </th>
+                        <td
+                            mat-cell
+                            *matCellDef="let mesure"
+                        >
+                            {{mesure.lcorps}}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="ldos">
+                        <th
+                            mat-header-cell
+                            *matHeaderCellDef
+                            mat-sort-header
+                        >
+                            Ldos
+                        </th>
+                        <td
+                            mat-cell
+                            *matCellDef="let mesure"
+                        >
+                            {{mesure.ldos}}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="poignet">
+                        <th
+                            mat-header-cell
+                            *matHeaderCellDef
+                            mat-sort-header
+                        >
+                            Poignet
+                        </th>
+                        <td
+                            mat-cell
+                            *matCellDef="let mesure"
+                        >
+                            {{mesure.poignet}}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="poitrine">
+                        <th
+                            mat-header-cell
+                            *matHeaderCellDef
+                            mat-sort-header
+                        >
+                            Poitrine
+                        </th>
+                        <td
+                            mat-cell
+                            *matCellDef="let mesure"
+                        >
+                            {{mesure.poitrine}}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="creteIliaques">
+                        <th
+                            mat-header-cell
+                            *matHeaderCellDef
+                            mat-sort-header
+                        >
+                            CretesIlliaques
+                        </th>
+                        <td
+                            mat-cell
+                            *matCellDef="let mesure"
+                        >
+                            {{mesure.creteIliaques}}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="dessousPoids">
+                        <th
+                            mat-header-cell
+                            *matHeaderCellDef
+                            mat-sort-header
+                        >
+                            Dessous Poids
+                        </th>
+                        <td
+                            mat-cell
+                            *matCellDef="let mesure"
+                        >
+                            {{mesure.dessousPoids}}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="tete">
+                        <th
+                            mat-header-cell
+                            *matHeaderCellDef
+                            mat-sort-header
+                        >
+                            Tête
+                        </th>
+                        <td
+                            mat-cell
+                            *matCellDef="let mesure"
+                        >
+                            {{mesure.tete}}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="dtypes">
+                        <th
+                            mat-header-cell
+                            *matHeaderCellDef
+                            mat-sort-header
+                        >
+                            Dtypes
+                        </th>
+                        <td
+                            mat-cell
+                            *matCellDef="let mesure"
+                        >
+                            {{mesure.dtypes}}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="client">
+                        <th
+                            mat-header-cell
+                            *matHeaderCellDef
+                            mat-sort-header
+                        >
+                            Client
+                        </th>
+                        <td
+                            mat-cell
+                            *matCellDef="let mesure"
+                        >
+                            {{mesure.client.nom}} {{mesure.client.phone}}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="action">
+                        <th
+                            mat-header-cell
+                            *matHeaderCellDef
+                            mat-sort-header
+                        >
+                            Action
+                        </th>
+                        <td
+                            mat-cell
+                            *matCellDef="let mesure"
+                        >
+                            <span class="flex gap-x-2 items-center">
+                                <fa-icon
+                                    class="cursor-pointer text-yellow-400"
+                                    [icon]="faEdit"
+                                    (click)="openEditForm(mesure,true)"
+                                ></fa-icon>
+                                <fa-icon
+                                    class="cursor-pointer text-red-600"
+                                    [icon]="faTrash"
+                                    (click)="deleteMesure(mesure.id)"
+                                ></fa-icon>
+                                <fa-icon
+                                    class="cursor-pointer text-primary-blue"
+                                    [icon]="faEye"
+                                    (click)="openEditForm(mesure,false)"
+                                ></fa-icon>
+                            </span>
+                        </td>
+                    </ng-container>
+
+                    <tbody>
+                        <tr
+                            mat-header-row
+                            *matHeaderRowDef="displayedColumns"
+                        ></tr>
+                        <tr
+                            mat-row
+                            *matRowDef="let mesure; columns: displayedColumns;"
+                        ></tr>
+
+                        <!-- mesure shown when there is no matching data. -->
+                        <tr *matNoDatamesure>
+                            <td
+                                class="mat-cell"
+                                colspan="4"
+                            >
+                                Aucune correspondance "{{input.value}}"
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <mat-paginator
+                    [pageSizeOptions]="[5, 10, 25, 100]"
+                    aria-label="Select page of clients"
+                ></mat-paginator>
+
+            </div>
+        </div>
+    </div>
+</div>
