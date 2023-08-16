@@ -40,71 +40,32 @@ public class JwtUtils {
             return null;
         }
     }
-    public String generateTokenFromUsername(String username) {
-        return Jwts.builder()
-                .setSubject(username)
-                .setIssuedAt(new Date())
-                .setExpiration(new Date((new Date()).getTime()
-                        + jwtExpirationMs))
-                .signWith(getSignKey(), SignatureAlgorithm.HS256)
-                .compact();
-    }
 
-    public void generateJwtCookie(HttpServletResponse response, UserDetailsImpl userPrincipal) {
+    public ResponseCookie generateJwtCookie(UserDetailsImpl userPrincipal) {
         String jwt = generateTokenFromUsername(userPrincipal.getUsername());
-        ResponseCookie cookie = ResponseCookie.from(jwtCookie, jwt)
-                .path("/api")
-                .maxAge(jwtExpirationMs)
-                .httpOnly(true)
-                .secure(true) // Set this to true if using HTTPS
-                .sameSite("Strict") // Set the SameSite attribute for CSRF protection
-                .build();
-
-        response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());
+        ResponseCookie cookie = ResponseCookie.from(jwtCookie, jwt).path("/api").maxAge(24 * 60 * 60).httpOnly(true).build();
+        return cookie;
     }
 
     public ResponseCookie getCleanJwtCookie() {
-        ResponseCookie cookie = ResponseCookie.from(jwtCookie,
-                null).path("/api").build();
+        ResponseCookie cookie = ResponseCookie.from(jwtCookie, null).path("/api").build();
         return cookie;
-    }
-    public String generateJwtToken(Authentication authentication) {
-
-        UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
-
-        // Generate the token
-        String generatedToken = Jwts.builder()
-                .setSubject((userPrincipal.getUsername()))
-                .setIssuedAt(new Date())
-                .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
-                .signWith(getSignKey(), SignatureAlgorithm.HS256)
-                .compact();
-
-        // Decode the generated token for comparison
-        String decodedToken = Jwts.parserBuilder().setSigningKey(getSignKey()).build()
-                .parseClaimsJws(generatedToken).getBody().getSubject();
-
-        // Print the generated and decoded tokens
-        System.out.println("Generated Token: " + generatedToken);
-        System.out.println("Decoded Token: " + decodedToken);
-
-        // Return the generated token
-        return generatedToken;
-    }
-
-
-    private Key getSignKey() {
-        return Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtSecret));
     }
 
     public String getUserNameFromJwtToken(String token) {
-        return Jwts.parserBuilder().setSigningKey(getSignKey()).build()
+        return Jwts.parserBuilder().setSigningKey(key()).build()
                 .parseClaimsJws(token).getBody().getSubject();
+    }
+
+    private Key key() {
+        return Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtSecret));
     }
 
     public boolean validateJwtToken(String authToken) {
         try {
-            Jwts.parserBuilder().setSigningKey(getSignKey()).build().parse(authToken);
+            Jws<Claims> claims = Jwts.parserBuilder().setSigningKey(key()).build().parseClaimsJws(authToken);
+            System.out.println("Decoded Claims: " + claims.getBody().toString());
+            Jwts.parserBuilder().setSigningKey(key()).build().parse(authToken);
             return true;
         } catch (MalformedJwtException e) {
             logger.error("Invalid JWT token: {}", e.getMessage());
@@ -118,4 +79,15 @@ public class JwtUtils {
 
         return false;
     }
+
+    public String generateTokenFromUsername(String username) {
+        return Jwts.builder()
+                .setSubject(username)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
+                .signWith(key(), SignatureAlgorithm.HS256)
+                .compact();
+    }
+
+
 }

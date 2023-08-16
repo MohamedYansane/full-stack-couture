@@ -7,6 +7,7 @@ import iam.couture.projet.backend_atelier_couture.exception.RessourceNotFoundExc
 import iam.couture.projet.backend_atelier_couture.repository.MesuresRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -16,20 +17,24 @@ import java.util.Map;
 @SuppressWarnings("ALL")
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("/api/v1")
 public class MesuresController {
     @Autowired
     protected MesuresRepository mesureRepository;
     @GetMapping("/mesures")
+
+    @PreAuthorize("hasAuthority('ROLE_MODERATOR')")
     protected List<MesureFemme>getAllMesures(){
         return mesureRepository.findAll();
     }
    @PostMapping("/mesures")
+   @PreAuthorize("hasRole('MODERATOR')")
    protected MesureFemme addMesure(@RequestBody MesureFemme mesure) {
 
        return mesureRepository.save(mesure);
    }
    @GetMapping("/mesures/{id}")
+   @PreAuthorize("hasRole('MODERATOR')")
     protected ResponseEntity<MesureFemme>getMesureById(@PathVariable Long id){
         MesureFemme mesure = mesureRepository.findById(id)
                 .orElseThrow(()-> new RessourceNotFoundException("Mesure is not in with id: "+id));
@@ -37,6 +42,7 @@ public class MesuresController {
 
    }
    @PutMapping("/mesures/{id}")
+
    protected ResponseEntity<MesureFemme>updateMesure(@PathVariable Long id, @RequestBody MesureFemme mesure){
        MesureFemme _mesure = mesureRepository.findById(id)
                .orElseThrow(()-> new RessourceNotFoundException("Mesure is not in with id: "+id));
@@ -73,6 +79,7 @@ public class MesuresController {
 
    }
     @DeleteMapping("/mesures/{id}")
+    @PreAuthorize("hasRole('MODERATOR')")
     protected ResponseEntity<Map<String, Boolean>>deleteMesure(@PathVariable Long id){
         MesureFemme mesure = mesureRepository.findById(id)
                 .orElseThrow(()-> new RessourceNotFoundException("Mesure is not in with id: "+id));

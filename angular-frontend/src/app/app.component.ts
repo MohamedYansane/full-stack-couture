@@ -3,9 +3,8 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./styles.scss']
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'okapy couture';
-
+  title = 'angular-frontend';
 }
