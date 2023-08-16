@@ -1,0 +1,18 @@
+{
+  "editor.codeActionsOnSave": {},
+  "editor.defaultFormatter": "stringham.angular-template-formatter",
+  "namespaceResolver.sortOnSave": true,
+  "editor.formatOnSave": true,
+  "[html]": {
+    "editor.defaultFormatter": "stringham.angular-template-formatter"
+  },
+
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+
+  "workbench.settings.openDefaultSettings": true,
+  "workbench.settings.useSplitJSON": false
+}
