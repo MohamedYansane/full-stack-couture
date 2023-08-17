@@ -12,13 +12,39 @@ import { AuthentificationGuard } from './guard/authentification.guard';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'home', component: HomeComponent },
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'clients', component: ClientListComponent },
-  { path: 'mesures', component: MesuresComponent },
-  { path: 'couturiers', component: CouturierComponent },
-  { path: 'forbidden', component: ForbiddenComponent },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: 'home',
+    component: HomeComponent,
+    canActivate: [AuthentificationGuard],
+  },
+  {
+    path: '',
+    redirectTo: 'forbidden',
+    pathMatch: 'full',
+  },
+  {
+    path: 'clients',
+    component: ClientListComponent,
+    canActivate: [AuthentificationGuard],
+  },
+  {
+    path: 'mesures',
+    component: MesuresComponent,
+    canActivate: [AuthentificationGuard],
+  },
+  {
+    path: 'couturiers',
+    component: CouturierComponent,
+    canActivate: [AuthentificationGuard],
+  },
+  {
+    path: 'forbidden',
+    component: ForbiddenComponent,
+  },
   {
     path: 'moderator',
     component: ModeratorDashboardComponent,

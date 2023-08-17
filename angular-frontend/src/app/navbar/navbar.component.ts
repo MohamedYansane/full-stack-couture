@@ -31,7 +31,9 @@ export class NavbarComponent {
   showAdminBoard = false;
   showModeratorBoard = false;
   username?: string;
-
+  isAdmin = false;
+  isMod = false;
+  isUser = false;
   eventBusSub?: Subscription;
 
   constructor(
@@ -48,10 +50,21 @@ export class NavbarComponent {
       const user = this.storageService.getUser();
       this.roles = user.roles;
 
+      for (let role of this.roles) {
+        console.log(role);
+        if (role === 'ROLE_ADMIN') {
+          this.isAdmin = true;
+        } else if (role === 'ROLE_MODERATOR') {
+          this.isMod = true;
+        } else {
+          this.isUser = true;
+        }
+      }
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
       this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
       console.log('moderator board' + this.showModeratorBoard);
       this.username = user.username;
+      console.log('username' + this.username);
     }
 
     this.eventBusSub = this.eventBusService.on('logout', () => {
