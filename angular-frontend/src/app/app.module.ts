@@ -3,7 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ClientListComponent } from './client-list/client-list.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -22,7 +23,6 @@ import { CouturierComponent } from './couturier/couturier.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { MesuresComponent } from './mesures/mesures.component';
 import { MesuresFormComponent } from './mesures-form/mesures-form.component';
-import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { ModeratorDashboardComponent } from './moderator-dashboard/moderator-dashboard.component';
@@ -31,6 +31,7 @@ import { AdminBoardComponent } from './admin-board/admin-board.component';
 import { httpInterceptorProviders } from './_helpers/http.interceptor';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { RegisterUserComponent } from './register-user/register-user.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,8 @@ import { RegisterUserComponent } from './register-user/register-user.component';
     MatTableModule,
     ReactiveFormsModule, //to handle errors or form control
     MatRadioModule,
+    MatFormFieldModule,
+    MatButtonModule,
   ],
   //if i hadn't put that here i wouldnt be able to send the cookie token in the request
   providers: [httpInterceptorProviders],

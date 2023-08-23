@@ -19,7 +19,7 @@ export class ForbiddenComponent {
       next: (res) => {
         console.log(res);
         this.storageService.clean();
-        this.router.navigateByUrl('/login');
+        this.router.navigateByUrl('login');
       },
       error: (err) => {
         console.log(err);

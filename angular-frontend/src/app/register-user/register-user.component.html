@@ -1,1 +1,67 @@
-<p>register-user works!</p>
+<app-header-login></app-header-login>
+<section class="container-login container mx-auto px-5 py-10  md:w-[598px] lg:w-[598px]  my-10 gap-y-4  ">
+  <div class="title text-xl font-bold">
+    Register
+  </div>
+  <div class=" grid grid-cols-1 px-4 md:px-0 lg:px-0">
+    <form [formGroup]="valForm" (ngSubmit)="onFormSubmit()" *ngIf="!isLoggedIn"
+      class="shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px]  rounded-md px-2 py-3">
+      <div class="user-informations  justify-between ">
+        <div class="input-box flex flex-col items-center">
+          <span class="input-title text-md font-bold">Username</span>
+          <input type="text" placeholder="Enter your username " class="border" formControlName="username">
+
+        </div>
+        <div class="input-box flex flex-col items-center">
+          <span class="input-title text-md font-bold">Email</span>
+          <input type="text" placeholder="Enter your email " class="border" formControlName="email">
+        </div>
+
+        <div class="input-box flex flex-col items-center">
+          <span class="input-title text-md font-bold">Password</span>
+          <input type="password" placeholder="Enter your password " class="border" formControlName="password">
+        </div>
+
+        <div class="flex justify-between w-full mt-4">
+
+          <button type="submit"
+            class="disabled:opacity-70 disabled:cursor-not-allowed btn-save px-4 text-white py-2 rounded-md shadow-md">
+            SignUp
+          </button>
+        </div>
+        <div class="flex justify-between w-full mt-4">
+          <p class=" text-gray-600 text-sm cursor-pointer">Do u have an account?</p>
+          <a routerLink="/login" class=" text-primary text-sm" type="submit">
+            Sign In
+          </a>
+        </div>
+      </div>
+    </form>
+    <div id="alert-border-3"
+      class="flex items-center p-4 mb-4 text-green-800 border-t-4 border-green-300 bg-green-50 dark:text-green-400 dark:bg-gray-800 dark:border-green-800"
+      role="alert" *ngIf="isLoggedIn">
+      <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+        viewBox="0 0 20 20">
+        <path
+          d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z">
+        </path>
+      </svg>
+      <div class="ml-3 text-sm font-medium">
+        User has logged in as {{ roles }}
+        <a href="#" class="font-semibold underline hover:no-underline">
+          example link
+        </a>
+        . Give it a click if you like.
+      </div>
+      <button type="button"
+        class="ml-auto -mx-1.5 -my-1.5 bg-green-50 text-green-500 rounded-lg focus:ring-2 focus:ring-green-400 p-1.5 hover:bg-green-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-green-400 dark:hover:bg-gray-700"
+        data-dismiss-target="#alert-border-3" aria-label="Close">
+        <span class="sr-only">Dismiss</span>
+        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>

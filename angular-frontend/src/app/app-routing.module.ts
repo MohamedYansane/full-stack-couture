@@ -10,11 +10,16 @@ import { HeaderLoginComponent } from './header-login/header-login.component';
 import { AdminBoardComponent } from './admin-board/admin-board.component';
 import { AuthentificationGuard } from './guard/authentification.guard';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
+import { RegisterUserComponent } from './register-user/register-user.component';
 
 const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'signup',
+    component: RegisterUserComponent,
   },
   {
     path: 'home',
